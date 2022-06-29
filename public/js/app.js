@@ -1941,28 +1941,103 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'App',
   components: {},
   data: function data() {
     return {
-      posts: '',
+      categories: '',
+      tags: '',
       postsResponse: ''
     };
   },
   methods: {
-    getAllPosts: function getAllPosts() {
+    getAllPosts: function getAllPosts(postPage) {
       var _this = this;
 
-      axios.get('/api/posts').then(function (response) {
+      //console.log(postPage);
+      axios.get('/api/posts', {
+        params: {
+          page: postPage
+        }
+      }).then(function (response) {
         _this.postsResponse = response.data;
+      })["catch"](function (e) {
+        console.log(e);
+      });
+    },
+    getAllCategories: function getAllCategories() {
+      var _this2 = this;
+
+      axios.get('/api/categories').then(function (response) {
+        //console.log(response.data);
+        _this2.categories = response.data;
+      })["catch"](function (e) {
+        console.log(e);
+      });
+    },
+    getAllTags: function getAllTags() {
+      var _this3 = this;
+
+      axios.get('/api/tags').then(function (response) {
+        //console.log(response.data);
+        _this3.tags = response.data;
       })["catch"](function (e) {
         console.log(e);
       });
     }
   },
   mounted: function mounted() {
-    this.getAllPosts();
+    this.getAllPosts(1);
+    this.getAllCategories();
+    this.getAllTags();
   }
 });
 
@@ -37554,60 +37629,200 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
+  return _c("div", { staticClass: "bg-light" }, [
     _c("h1", { staticClass: "text-center py-5" }, [_vm._v("Work In Progress")]),
     _vm._v(" "),
-    _c("section", { staticClass: "posts" }, [
-      _c("div", { staticClass: "container" }, [
-        _c(
-          "div",
-          { staticClass: "row row-cols-1 row-cols-sm-2 row-cols-md-3" },
-          _vm._l(_vm.postsResponse.data, function (post) {
-            return _c("div", { key: post.id, staticClass: "col" }, [
-              _c("div", { staticClass: "product card" }, [
-                _c("img", { attrs: { src: post.img, alt: post.title } }),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-body" }, [
-                  _c("h3", [_vm._v(_vm._s(post.title))]),
-                  _vm._v(" "),
-                  _c("p", [_vm._v(_vm._s(post.content))]),
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "card-footer" }, [
-                  post.category
-                    ? _c("span", [
-                        _c("strong", [_vm._v("Categoria: ")]),
-                        _vm._v(_vm._s(post.category.name)),
-                      ])
-                    : _vm._e(),
-                  _vm._v(" "),
-                  post.tags.length > 0
-                    ? _c("div", { staticClass: "tags" }, [
-                        _c(
-                          "ul",
-                          [
-                            _c("strong", [_vm._v("Tags:")]),
-                            _vm._v(" "),
-                            _vm._l(post.tags, function (tag) {
-                              return _c("li", { key: tag.id }, [
-                                _vm._v(
-                                  "\n                                        " +
-                                    _vm._s(tag.name) +
-                                    "\n                                    "
-                                ),
-                              ])
-                            }),
-                          ],
-                          2
-                        ),
-                      ])
-                    : _vm._e(),
-                ]),
+    _c("div", { staticClass: "container-fluid" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("main", { staticClass: "col-12 col-md-9 col-lg-10" }, [
+          _c("section", { staticClass: "posts py-5" }, [
+            _c("div", { staticClass: "container" }, [
+              _c(
+                "div",
+                { staticClass: "row row-cols-1 row-cols-sm-2 row-cols-md-3" },
+                _vm._l(_vm.postsResponse.data, function (post) {
+                  return _c("div", { key: post.id, staticClass: "col p-3" }, [
+                    _c("div", { staticClass: "product card" }, [
+                      _c("img", {
+                        attrs: { src: "storage/" + post.img, alt: post.title },
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card-body" }, [
+                        _c("h3", [_vm._v(_vm._s(post.title))]),
+                        _vm._v(" "),
+                        _c("p", [_vm._v(_vm._s(post.content))]),
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card-footer" }, [
+                        post.category
+                          ? _c("span", [
+                              _c("strong", [_vm._v("Categoria: ")]),
+                              _vm._v(_vm._s(post.category.name)),
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        post.tags.length > 0
+                          ? _c("div", { staticClass: "tags" }, [
+                              _c(
+                                "ul",
+                                [
+                                  _c("strong", [_vm._v("Tags:")]),
+                                  _vm._v(" "),
+                                  _vm._l(post.tags, function (tag) {
+                                    return _c("li", { key: tag.id }, [
+                                      _vm._v(
+                                        "\n                                        " +
+                                          _vm._s(tag.name) +
+                                          "\n                                    "
+                                      ),
+                                    ])
+                                  }),
+                                ],
+                                2
+                              ),
+                            ])
+                          : _vm._e(),
+                      ]),
+                    ]),
+                  ])
+                }),
+                0
+              ),
+              _vm._v(" "),
+              _c("nav", { attrs: { "aria-label": "Page navigation" } }, [
+                _c(
+                  "ul",
+                  { staticClass: "pagination justify-content-center" },
+                  [
+                    _vm.postsResponse.current_page > 1
+                      ? _c("li", { staticClass: "page-item" }, [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "page-link",
+                              attrs: { href: "#", "aria-label": "Previous" },
+                              on: {
+                                click: function ($event) {
+                                  $event.preventDefault()
+                                  return _vm.getAllPosts(
+                                    _vm.postsResponse.current_page - 1
+                                  )
+                                },
+                              },
+                            },
+                            [
+                              _c("span", { attrs: { "aria-hidden": "true" } }, [
+                                _vm._v("«"),
+                              ]),
+                              _vm._v(" "),
+                              _c("span", { staticClass: "visually-hidden" }, [
+                                _vm._v("Previous"),
+                              ]),
+                            ]
+                          ),
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _vm._l(_vm.postsResponse.last_page, function (page) {
+                      return _c(
+                        "li",
+                        {
+                          key: page,
+                          staticClass:
+                            "{ 'page-item' : true, 'active' : page == postsResponse.current_page }",
+                        },
+                        [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "page-link",
+                              attrs: { href: "#" },
+                              on: {
+                                click: function ($event) {
+                                  $event.preventDefault()
+                                  return _vm.getAllPosts(page)
+                                },
+                              },
+                            },
+                            [_vm._v(_vm._s(page))]
+                          ),
+                        ]
+                      )
+                    }),
+                    _vm._v(" "),
+                    _vm.postsResponse.current_page < _vm.postsResponse.last_page
+                      ? _c("li", { staticClass: "page-item" }, [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "page-link",
+                              attrs: { href: "#", "aria-label": "Next" },
+                              on: {
+                                click: function ($event) {
+                                  $event.preventDefault()
+                                  return _vm.getAllPosts(
+                                    _vm.postsResponse.current_page + 1
+                                  )
+                                },
+                              },
+                            },
+                            [
+                              _c("span", { attrs: { "aria-hidden": "true" } }, [
+                                _vm._v("»"),
+                              ]),
+                              _vm._v(" "),
+                              _c("span", { staticClass: "visually-hidden" }, [
+                                _vm._v("Next"),
+                              ]),
+                            ]
+                          ),
+                        ])
+                      : _vm._e(),
+                  ],
+                  2
+                ),
               ]),
-            ])
-          }),
-          0
-        ),
+            ]),
+          ]),
+        ]),
+        _vm._v(" "),
+        _c("aside", { staticClass: "bg-white p-2 col-12 col-md-3 col-lg-2" }, [
+          _c("div", { staticClass: "categories" }, [
+            _c("h6", [_vm._v("Categorie:")]),
+            _vm._v(" "),
+            _c(
+              "ul",
+              _vm._l(_vm.categories, function (category) {
+                return _c("li", { key: category.id }, [
+                  _vm._v(
+                    "\n                            " +
+                      _vm._s(category.name) +
+                      "\n                    "
+                  ),
+                ])
+              }),
+              0
+            ),
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "tags" }, [
+            _c("h6", [_vm._v("Tags:")]),
+            _vm._v(" "),
+            _c(
+              "ul",
+              _vm._l(_vm.tags, function (tag) {
+                return _c("li", { key: tag.id }, [
+                  _vm._v(
+                    "\n                            " +
+                      _vm._s(tag.name) +
+                      "\n                    "
+                  ),
+                ])
+              }),
+              0
+            ),
+          ]),
+        ]),
       ]),
     ]),
   ])
