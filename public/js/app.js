@@ -2032,6 +2032,13 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (e) {
         console.log(e);
       });
+    },
+    trimText: function trimText(text) {
+      if (text.length > 100) {
+        return text.slice(0, 100);
+      }
+
+      return text;
     }
   },
   mounted: function mounted() {
@@ -37650,7 +37657,11 @@ var render = function () {
                       _c("div", { staticClass: "card-body" }, [
                         _c("h3", [_vm._v(_vm._s(post.title))]),
                         _vm._v(" "),
-                        _c("p", [_vm._v(_vm._s(post.content))]),
+                        post.content
+                          ? _c("p", [
+                              _vm._v(_vm._s(_vm.trimText(post.content))),
+                            ])
+                          : _vm._e(),
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "card-footer" }, [

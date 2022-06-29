@@ -13,7 +13,7 @@
                             <img :src="'storage/' + post.img" :alt="post.title">
                             <div class="card-body">
                                 <h3>{{post.title}}</h3>
-                                <p>{{post.content}}</p>
+                                <p v-if="post.content" >{{trimText(post.content)}}</p>
                             </div>
                             <div class="card-footer">
                                 <span v-if="post.category"><strong>Categoria: </strong>{{ post.category.name}}</span>
@@ -126,6 +126,12 @@ export default {
                 .catch(e => {
                     console.log(e);
                 })
+        },
+        trimText(text) {
+            if(text.length > 100) {
+                return text.slice(0, 100);
+            }
+            return text;
         }
     },
     mounted() {
