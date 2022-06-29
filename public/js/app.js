@@ -1914,9 +1914,56 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'App',
-  components: {}
+  components: {},
+  data: function data() {
+    return {
+      posts: '',
+      postsResponse: ''
+    };
+  },
+  methods: {
+    getAllPosts: function getAllPosts() {
+      var _this = this;
+
+      axios.get('/api/posts').then(function (response) {
+        _this.postsResponse = response.data;
+      })["catch"](function (e) {
+        console.log(e);
+      });
+    }
+  },
+  mounted: function mounted() {
+    this.getAllPosts();
+  }
 });
 
 /***/ }),
@@ -37507,20 +37554,65 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("h1", { staticClass: "text-center py-5" }, [
-        _vm._v("Work In Progress"),
+  return _c("div", [
+    _c("h1", { staticClass: "text-center py-5" }, [_vm._v("Work In Progress")]),
+    _vm._v(" "),
+    _c("section", { staticClass: "posts" }, [
+      _c("div", { staticClass: "container" }, [
+        _c(
+          "div",
+          { staticClass: "row row-cols-1 row-cols-sm-2 row-cols-md-3" },
+          _vm._l(_vm.postsResponse.data, function (post) {
+            return _c("div", { key: post.id, staticClass: "col" }, [
+              _c("div", { staticClass: "product card" }, [
+                _c("img", { attrs: { src: post.img, alt: post.title } }),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-body" }, [
+                  _c("h3", [_vm._v(_vm._s(post.title))]),
+                  _vm._v(" "),
+                  _c("p", [_vm._v(_vm._s(post.content))]),
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-footer" }, [
+                  post.category
+                    ? _c("span", [
+                        _c("strong", [_vm._v("Categoria: ")]),
+                        _vm._v(_vm._s(post.category.name)),
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  post.tags.length > 0
+                    ? _c("div", { staticClass: "tags" }, [
+                        _c(
+                          "ul",
+                          [
+                            _c("strong", [_vm._v("Tags:")]),
+                            _vm._v(" "),
+                            _vm._l(post.tags, function (tag) {
+                              return _c("li", { key: tag.id }, [
+                                _vm._v(
+                                  "\n                                        " +
+                                    _vm._s(tag.name) +
+                                    "\n                                    "
+                                ),
+                              ])
+                            }),
+                          ],
+                          2
+                        ),
+                      ])
+                    : _vm._e(),
+                ]),
+              ]),
+            ])
+          }),
+          0
+        ),
       ]),
-    ])
-  },
-]
+    ]),
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -49915,9 +50007,9 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Applications/MAMP/htdocs/LARAVEL/laravel-many-to-many/resources/js/app.js */"./resources/js/app.js");
-__webpack_require__(/*! /Applications/MAMP/htdocs/LARAVEL/laravel-many-to-many/resources/sass/admin.scss */"./resources/sass/admin.scss");
-module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/LARAVEL/laravel-many-to-many/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Applications/MAMP/htdocs/LARAVEL/laravel-api/resources/js/app.js */"./resources/js/app.js");
+__webpack_require__(/*! /Applications/MAMP/htdocs/LARAVEL/laravel-api/resources/sass/admin.scss */"./resources/sass/admin.scss");
+module.exports = __webpack_require__(/*! /Applications/MAMP/htdocs/LARAVEL/laravel-api/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
